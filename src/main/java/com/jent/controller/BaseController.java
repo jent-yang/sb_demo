@@ -1,30 +1,23 @@
 package com.jent.controller;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
+import com.jent.bean.Category;
 import com.jent.bean.Company;
 import com.jent.repository.CompanyRepository;
 import com.jent.service.CategoryService;
 
-@RestController
-@EnableAutoConfiguration
-@RequestMapping("/company")
+@Controller
 public class BaseController {
-
-	@RequestMapping("hello")
-	@ResponseBody
-	public String hello(){
-		return "hello springboot";
-	}
 	
-	@RequestMapping(value ="/{code}",method = RequestMethod.GET,
+	@RequestMapping(value ="company/{code}",method = RequestMethod.GET,
 			produces = {"application/json;charset=UTF-8"})
 	public ModelMap getCompanyByCode(@PathVariable String code){
 		Company c = new CompanyRepository().getCompanyByCode(code);
@@ -33,7 +26,7 @@ public class BaseController {
 		return resultMap;
 	}
 	
-	@RequestMapping(value ="/list",method = RequestMethod.GET,
+	@RequestMapping(value ="companiest",method = RequestMethod.GET,
 			produces = {"application/json;charset=UTF-8"})
 	public ModelMap companyList(){
 		ModelMap resultMap = new ModelMap();
@@ -49,8 +42,10 @@ public class BaseController {
 		return resultMap;
 	}
 	
-	public static void main(String[] args) {
-		SpringApplication.run(BaseController.class, args);
+	@RequestMapping("/category/view")
+	public String CategoryView(Model model){
+		List<Category> list = new CategoryService().getCategroyList();
+		model.addAttribute("list", list);
+		return "category";
 	}
-
 }
