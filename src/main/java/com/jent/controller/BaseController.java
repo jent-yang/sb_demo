@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jent.bean.Company;
 import com.jent.repository.CompanyRepository;
+import com.jent.service.CategoryService;
 
 @RestController
 @EnableAutoConfiguration
@@ -37,6 +38,14 @@ public class BaseController {
 	public ModelMap companyList(){
 		ModelMap resultMap = new ModelMap();
 		resultMap.put("list", new CompanyRepository().getCompanyList());
+		return resultMap;
+	}
+	
+	@RequestMapping(value ="/categories",method = RequestMethod.GET,
+			produces = {"application/json;charset=UTF-8"})
+	public ModelMap CategoryList(){
+		ModelMap resultMap = new ModelMap();
+		resultMap.put("list", new CategoryService().getCategroyList());
 		return resultMap;
 	}
 	
