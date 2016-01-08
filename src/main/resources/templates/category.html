@@ -3,10 +3,14 @@
 <head>
     <title>category</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script th:inline="javascript">
+
+    var name = /*[[${company.company_address}]]*/ null;
+
+    </script>
 </head>
 <body>
-    <p th:text="Hello" />
-    </br>
+	<h3 th:text="#{home.welcome}"></h3>
     <div>
     	<table>
     		<thead>
@@ -22,10 +26,66 @@
     	</table>
     </div>
     
-    </br>
+    <p>========================</p>
     
     <div>
-    	<p th:each="c : ${list}"
+    	<div th:each="a : ${list}">
+    		<p th:id="${a.id}" th:text="${a.name}">category</p>
+    	</div>
     </div>
+    
+    <p>========================</p>
+    
+    <div th:unless="${list.isEmpty()}">
+    	<div th:text="|分类总数 :  ${list.size()}|"></div>
+    	<div th:each="b : ${list}">
+    		<div th:if="${b.id} == 55d0b04f6e6f64be77050000">
+    			<p th:id="${b.id}" th:text="${b.name}">category</p>
+    			<p th:text="${b.getSimpleName()}">category</p>
+    		</div>
+    	</div>
+    </div>
+    
+    <p>========================</p>
+    <div>
+    	<span th:text="${#locale.country}"></span>
+    </div>
+    
+    <p>========================</p>
+    <div th:object="${company}">
+    	<p th:text="${#object.company_name}"></p>
+    	<p th:text="*{company_code}"></p>
+    </div>
+    
+    <p>========================</p>
+    <form action="company.html" th:attr="action=@{/company}" method="post">
+	  <fieldset>
+	    <input type="text" name="name" />
+	    <input type="text" name="code" />
+	    <input type="submit" value="Subscribe me!"/>
+	  </fieldset>
+	</form>
+	
+	<p>========================</p>
+	<div th:with="d = ${list[0]}">
+		<p th:id="${d.id}" th:text="${d.name}">category</p>
+	</div>
+	<div th:with="a = ${list[1]}">
+		<p th:id="${a.id}" th:text="${a.name}">category</p>
+	</div>
+	
+	<p>========================</p>
+	<table>
+	  <th:block th:each="e : ${list}">
+	    <tr>
+	        <td th:text="${e.id}">...</td>
+	        <td th:text="${e.name}">...</td>
+	    </tr>
+	    <tr>
+	        <td colspan="2" th:text="${e.name}">...</td>
+	    </tr>
+	  </th:block>
+	</table>
+	
 </body>
 </html>
