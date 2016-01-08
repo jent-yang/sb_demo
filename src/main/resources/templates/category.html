@@ -3,14 +3,14 @@
 <head>
     <title>category</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" media="all" 
+          href="../css/category.css" th:href="@{/css/category.css}" />
     <script th:inline="javascript">
-
     var name = /*[[${company.company_address}]]*/ null;
-
     </script>
 </head>
 <body>
-	<h3 th:text="#{home.welcome}"></h3>
+	<h3 class="title">Category</h3>
     <div>
     	<table>
     		<thead>
@@ -87,5 +87,9 @@
 	  </th:block>
 	</table>
 	
+	<footer>
+        <div th:replace="fragments/footer :: footer">&copy; 2014 The Static Templates</div>
+    </footer>
+    
 </body>
 </html>
