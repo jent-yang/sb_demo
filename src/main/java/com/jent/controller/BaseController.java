@@ -8,7 +8,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jent.bean.Category;
@@ -44,20 +43,6 @@ public class BaseController {
 	public ModelMap categoryList(){
 		ModelMap resultMap = new ModelMap();
 		resultMap.put("list", new CategoryService().getCategroyList());
-		return resultMap;
-	}
-	
-	@RequestMapping(value ="/company",method = RequestMethod.POST,
-			produces = {"application/json;charset=UTF-8"})
-	@ResponseBody
-	public ModelMap addCompany(
-			@RequestParam(value = "name", required = true) String name,
-			@RequestParam(value = "code",required = true) String code){
-		ModelMap resultMap = new ModelMap();
-		Company c = new Company();
-		c.setCompany_code(code);
-		c.setCompany_name(name);
-		resultMap.put("company", c);
 		return resultMap;
 	}
 	
