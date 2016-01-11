@@ -16,4 +16,8 @@ public class Category {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public String getSimpleName(){
+		return this.name + "simple";
+	}
 }
